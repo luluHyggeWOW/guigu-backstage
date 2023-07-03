@@ -1,6 +1,6 @@
 // 常量路由
 import { createRouter, createWebHashHistory } from "vue-router";
-import { constantRoute } from "./routers";
+import { constantRoute } from "./routes";
 let router = createRouter({
   history: createWebHashHistory(),
   routes: constantRoute,

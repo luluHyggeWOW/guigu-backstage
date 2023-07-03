@@ -56,30 +56,28 @@ const login = async () => {
     })
   }
 }
-const validatorUserName=()=>{
-  p
+const validatorUserName = (rule: any, value: any, callback: any) => {
+  // rule 验证对象 value 元素文本内容 callback 函数符合条件放行 不符合注入错误提示信息
+  if (value.length >= 5) {
+    callback()
+  } else {
+    callback(new Error('账号长度至少5位'))
+  }
+}
+const validatorPassword = (rule: any, value: any, callback: any) => {
+  // rule 验证对象 value 元素文本内容 callback 函数符合条件放行 不符合注入错误提示信息
+  if (value.length >= 6) {
+    callback()
+  } else {
+    callback(new Error('密码长度至少6位'))
+  }
 }
 const rules = {
   username: [
     // { required: true, message: '用户名不能为空', trigger: 'blur' },
-    {trigger:'change',validator:validatorUserName}
-    {
-      required: true,
-      min: 5,
-      max: 10,
-      message: '用户名长度为5位-10位',
-      trigger: 'blur',
-    },
+    { trigger: 'change', validator: validatorUserName },
   ],
-  password: [
-    {
-      required: true,
-      min: 6,
-      max: 15,
-      message: '密码长度为6位-15位',
-      trigger: 'change',
-    },
-  ],
+  password: [{ trigger: 'change', validator: validatorPassword }],
 }
 </script>
 

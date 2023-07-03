@@ -11,9 +11,19 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       symbolId: 'icon-[dir]-[name]',
     }),
     viteMockServe({
-      enable: command === 'serve',
+      localEnabled: command === 'serve',
     }),
+
     ],
     resolve: { alias: { '@': path.resolve('./src') } },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          javascriptEnabled: true,
+          additionalData: '@import "@/styles/varuable.scss";',
+        },
+      },
+    },
+
   }
 }

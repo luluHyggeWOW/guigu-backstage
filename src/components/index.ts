@@ -1,6 +1,6 @@
 
 import SvgIcon from './SvgIcon/index.vue'
-
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 const allGloablComponent: any = { SvgIcon }
 
 //对外暴露插件对象
@@ -12,6 +12,8 @@ export default {
       //注册为全剧组件
       app.component(key, allGloablComponent[key])
     })
-
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+      app.component(key, component)
+    }
   }
 }

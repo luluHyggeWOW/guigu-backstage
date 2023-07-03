@@ -8,4 +8,4 @@ enum API {
 // 登录
 export const reqLogin = (data: loginForm) => request.post<any, loginResponseData>(API.LOGIN_URL, data)
 // 获取用户信息
-export const reqUserInfo = (data) => request.post(API.LOGIN_URL, data)
+export const reqUserInfo = () => request.get<any, loginResponseData>(API.USERINGO_URL)
