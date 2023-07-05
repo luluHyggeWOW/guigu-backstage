@@ -63,13 +63,14 @@ export default {
     }
   }
   .layout_tabbar {
-    position: fixed;
+    position: relative;
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
     // background: cyan;
     top: 0;
     left: $base-menu-width;
     transition: all 0.3s;
+    z-index: 99;
     &.fold {
       width: calc(100% - $base-menu-min-width);
       left: $base-menu-min-width;
@@ -82,8 +83,8 @@ export default {
     left: $base-menu-width;
     top: $base-tabbar-height;
     overflow: auto;
-    height: 2000px;
     transition: all 0.3s;
+    z-index: 0;
     &.fold {
       width: calc(100% - $base-menu-min-width);
       left: $base-menu-min-width;
