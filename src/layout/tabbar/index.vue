@@ -24,7 +24,7 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -34,12 +34,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import useLayOutSettingStore from '@/store/modules/setting'
 import useUserStore from '@/store/modules/user'
 let LayOutSettingStore = useLayOutSettingStore()
 let userStore = useUserStore()
+let $router = useRouter()
+let $route = useRoute()
 const changeIcon = () => {
   LayOutSettingStore.fold = !LayOutSettingStore.fold
+  console.log(userStore.avatar, userStore.username)
 }
 const updateRefsh = () => {
   LayOutSettingStore.refsh = !LayOutSettingStore.refsh
@@ -52,6 +56,14 @@ const fullScreen = () => {
   } else {
     document.exitFullscreen()
   }
+}
+const logout = async () => {
+  // 1 向服务器发请求【退出登录接口】
+  // 2 苍古用户数据清空【token|名字、头像】
+  // 3 跳转到登录页面
+  await userStore.userLogout()
+  // 跳转回登录页面
+  $router.push({ path: '/login', query: { redirect: $route.path } })
 }
 </script>
 <script lang="ts">

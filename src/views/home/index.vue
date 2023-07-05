@@ -10,8 +10,8 @@ import useUserStore from '@/store/modules/user'
 let userStore = useUserStore
 // 首页挂载完毕
 onMounted(() => {
-  let userStore = useUserStore()
-  userStore.userInfo()
+  // let userStore = useUserStore()
+  // userStore.userInfo()
 })
 </script>
 

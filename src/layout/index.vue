@@ -45,6 +45,7 @@ export default {
   width: 100%;
   height: 100vh;
   .layout_slider {
+    position: fixed;
     width: $base-menu-width;
     height: 100vh;
     background: $base-menu-background;
@@ -75,10 +76,9 @@ export default {
     }
   }
   .layout_main {
-    position: absolute;
+    position: fixed;
     width: calc(100% - $base-menu-width);
     height: calc(100% - $base-tabbar-height);
-    background: orange;
     left: $base-menu-width;
     top: $base-tabbar-height;
     overflow: auto;
