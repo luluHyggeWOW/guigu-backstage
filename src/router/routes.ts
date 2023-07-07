@@ -129,6 +129,16 @@ export const constantRoute = [
         }
       },
       {
+        path: '/product/spu',
+        name: 'Spu',
+        component: () => import('@/views/product/spu/index.vue'),
+        meta: {
+          title: 'Spu管理',
+          hidden: false,
+          icon: 'Orange'
+        }
+      },
+      {
         path: '/product/sku',
         name: 'Sku',
         component: () => import('@/views/product/sku/index.vue'),
@@ -138,16 +148,7 @@ export const constantRoute = [
           icon: 'Calendar'
         }
       },
-      {
-        path: '/product/skp',
-        name: 'Skp',
-        component: () => import('@/views/product/skp/index.vue'),
-        meta: {
-          title: 'Skp管理',
-          hidden: false,
-          icon: 'Orange'
-        }
-      },
+
     ]
   },
   {

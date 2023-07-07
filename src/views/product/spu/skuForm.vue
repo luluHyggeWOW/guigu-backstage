@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>角色管理111 </h1>
+    spu
   </div>
 </template>
 
 <script setup lang="ts">
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 </style>
