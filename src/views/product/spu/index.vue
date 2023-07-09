@@ -10,9 +10,9 @@
           <el-table-column label="SPU名称" prop="spuName" width="300px"></el-table-column>
           <el-table-column label="SPU描述" prop="description" show-overflow-tooltip=""></el-table-column>
           <el-table-column label="SPU操作" width="300px">
-            <template #default={row,$index}>
+            <template #default={row}>
               <el-button type="primary" icon="Plus" size="small"></el-button>
-              <el-button @click="updateSpu" type="primary" icon="Edit" size="small"></el-button>
+              <el-button @click="updateSpu(row)" type="primary" icon="Edit" size="small"></el-button>
               <el-button type="primary" icon="View" size="small"></el-button>
               <el-button type="primary" icon="Delete" size="small"></el-button>
             </template>
@@ -24,7 +24,7 @@
           @current-change="getHasSup" @size-change="changeSize">
         </el-pagination>
       </div>
-      <SpuForm @changeScene="changeScene" v-show="scene==1"></SpuForm>
+      <SpuForm ref="spuform" @changeScene="changeScene" v-show="scene==1"></SpuForm>
       <SkuForm v-show="scene==2"></SkuForm>
     </el-card>
   </div>
@@ -34,7 +34,7 @@
 import useCategoryStore from '@/store/modules/category'
 import { ref, watch } from 'vue'
 import { reqHasSpu } from '@/api/product/spu/index'
-import { HasSpuResponseData, Records } from '@/api/product/spu/type'
+import { HasSpuResponseData, Records, SpuData } from '@/api/product/spu/type'
 let categoryStore = useCategoryStore()
 import SpuForm from './spuForm.vue'
 import SkuForm from './skuForm.vue'
@@ -43,6 +43,7 @@ let pageNo = ref<number>(1)
 let pageSize = ref<number>(10)
 let records = ref<Records>([])
 let total = ref<number>(0)
+let spuform = ref<any>([])
 const getHasSup = async (pager = 1) => {
   pageNo.value = pager
   let result: HasSpuResponseData = await reqHasSpu(
@@ -61,8 +62,10 @@ const changeSize = () => {
 const addSpu = () => {
   scene.value = 1
 }
-const updataSpu = () => {
+const updateSpu = (row: SpuData) => {
   scene.value = 1
+  // 调用子组件方法获取完整已有的SPU的数据
+  spuform.value.initHasSpuData(row)
 }
 const changeScene = (num: number) => {
   scene.value = num

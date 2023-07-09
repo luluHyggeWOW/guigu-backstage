@@ -1,12 +1,33 @@
 // 书写属性相关的API的文件
 import request from "@/utils/request"
-import type { HasSpuResponseData } from './type'
+import type {
+  HasSpuResponseData, AllTradeMark, SpuHasImg,
+  SaleAttrResponseData, HasSaleAttrResponseData,
+  SpuData
+} from './type'
+
+
+
 enum API {
   HASSPU_URL = "/admin/product/",
-  C2_URL = "/admin/product/getCategory2/",
-  C3_URL = "/admin/product/getCategory3/",
-  ATTR_URL = "/admin/product/attrInfoList/",
-  ADDORUPDATE_URL = "/admin/product/saveAttrInfo",
-  DELETEATTR_URL = "/admin/product/deleteAttr/"
+  ALLTRADEMARK_URL = "/admin/product/baseTrademark/getTrademarkList/",
+  IMAGE_URL = "/admin/product/spuImageList/",
+  SPUHASSALEATTR_URL = "/admin/product/spuSaleAttrList/",
+  ALLSALEATTR_URL = "/admin/product/baseSaleAttrList/",
+  UPDATESPU_URL = "/admin/product/updateSpuInfo/",
+  ADDSPU_URL = "/admin/product/saveSpuInfo/"
 }
 export const reqHasSpu = (page: number, limit: number, category3Id: string | number) => request.get<any, HasSpuResponseData>(API.HASSPU_URL + `${page}/${limit}?category3Id=${category3Id}`)
+export const reqAllTradeMark = () => request.get<any, AllTradeMark>(API.ALLTRADEMARK_URL)
+export const reqSpuImageList = (spuId: number) => request.get<any, SpuHasImg>(API.IMAGE_URL + spuId)
+export const reqSpuHasSaleAttr = (spuId: number) => request.get<any, SaleAttrResponseData>(API.SPUHASSALEATTR_URL + spuId)
+export const reqAllAsleAttr = () => request.get<any, HasSaleAttrResponseData>(API.ALLSALEATTR_URL)
+
+export const reqAddOrUpdateSpu = (data: SpuData) => {
+  if (data.id) {
+    request.post<any, any>(API.UPDATESPU_URL, data)
+  } else {
+    request.post<any, any>(API.ADDSPU_URL, data)
+  }
+}
+
