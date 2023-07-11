@@ -3,7 +3,7 @@ import request from "@/utils/request"
 import type {
   HasSpuResponseData, AllTradeMark, SpuHasImg,
   SaleAttrResponseData, HasSaleAttrResponseData,
-  SpuData
+  SpuData, SkuData, SkuInfoData
 } from './type'
 
 
@@ -15,14 +15,16 @@ enum API {
   SPUHASSALEATTR_URL = "/admin/product/spuSaleAttrList/",
   ALLSALEATTR_URL = "/admin/product/baseSaleAttrList/",
   UPDATESPU_URL = "/admin/product/updateSpuInfo/",
-  ADDSPU_URL = "/admin/product/saveSpuInfo/"
+  ADDSPU_URL = "/admin/product/saveSpuInfo/",
+  ADDSKU_URL = "/admin/product/saveSkuInfo/",
+  SKUINFO_URL = "/admin/product/findBySpuId/",
+  REMOVESPU_URL = '/admin/product/deleteSpu/'
 }
 export const reqHasSpu = (page: number, limit: number, category3Id: string | number) => request.get<any, HasSpuResponseData>(API.HASSPU_URL + `${page}/${limit}?category3Id=${category3Id}`)
 export const reqAllTradeMark = () => request.get<any, AllTradeMark>(API.ALLTRADEMARK_URL)
 export const reqSpuImageList = (spuId: number) => request.get<any, SpuHasImg>(API.IMAGE_URL + spuId)
 export const reqSpuHasSaleAttr = (spuId: number) => request.get<any, SaleAttrResponseData>(API.SPUHASSALEATTR_URL + spuId)
 export const reqAllAsleAttr = () => request.get<any, HasSaleAttrResponseData>(API.ALLSALEATTR_URL)
-
 export const reqAddOrUpdateSpu = (data: SpuData) => {
   if (data.id) {
     request.post<any, any>(API.UPDATESPU_URL, data)
@@ -30,4 +32,7 @@ export const reqAddOrUpdateSpu = (data: SpuData) => {
     request.post<any, any>(API.ADDSPU_URL, data)
   }
 }
+export const reqAddSku = (data: SkuData) => request.post<any, any>(API.ADDSKU_URL, data)
+export const reqSkuList = (spuId: number | string) => request.get<any, SkuInfoData>(API.SKUINFO_URL + spuId)
+export const reqRemoveSpu = (spuId: number | string) => request.delete<any, any>(API.REMOVESPU_URL + spuId)
 
