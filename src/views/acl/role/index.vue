@@ -13,7 +13,6 @@
     </el-card>
     <el-card class="elcard">
       <el-button type="primary" @click="addRole">添加职位</el-button>
-      <el-button @click="deleteSelectUser">批量删除</el-button>
       <el-table @selection-change="selectChange" border :data="allRole" style="margin-top:10px">
         <el-table-column label="#" align="center" type="index"></el-table-column>
         <el-table-column label="id" width="150px" align="center" prop="id"></el-table-column>
@@ -25,7 +24,7 @@
             <el-button type="primary" size="small" icon="User" @click="setPermisstion(row)">分配角色</el-button>
             <el-button type="primary" size="small" icon="Edit" @click="updateRole(row)">编辑</el-button>
 
-            <el-popconfirm :title="`你确定要删除 ${row.username} 吗？`" width="240px" @confirm="deleteUser(row.id)">
+            <el-popconfirm :title="`你确定要删除 ${row.roleName} 吗？`" width="240px" @confirm="deleteRole(row.id)">
               <template #reference>
                 <el-button type="primary" size="small" icon="Delete">删除</el-button>
               </template>
@@ -76,6 +75,7 @@ import {
   reqAllRoleList,
   reqAllMenuList,
   reqSetPermisstion,
+  reqRemoveRole,
 } from '@/api/acl/role/index'
 import {
   RoleResponseData,
@@ -211,6 +211,16 @@ const save1 = async () => {
     window.location.reload()
   } else {
     ElMessage({ type: 'error', message: '分配权限失败' })
+  }
+}
+
+const deleteRole = async (roleId: number) => {
+  let result: any = await reqRemoveRole(roleId)
+  if (result.code == 200) {
+    ElMessage({ type: 'success', message: '删除成功' })
+    getHasRole(allRole.value.length > 1 ? pageNo.value : pageNo.value - 1)
+  } else {
+    ElMessage({ type: 'error', message: '' })
   }
 }
 onMounted(() => {

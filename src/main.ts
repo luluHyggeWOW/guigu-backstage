@@ -7,6 +7,8 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import 'element-plus/dist/index.css'
 import 'virtual:svg-icons-register'
 import SvgIcon from '@/components/SvgIcon/index.vue'
+// 暗黑模式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import router from "./router";
 // 引入模板的全局的样式
 import '@/styles/index.scss'
