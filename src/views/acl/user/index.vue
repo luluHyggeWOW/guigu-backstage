@@ -7,7 +7,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :disabled="!keyword" @click="search">搜索</el-button>
-          <el-button @click="resst">重置</el-button>
+          <el-button @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -25,7 +25,7 @@
         <el-table-column label="创建时间" align="center" prop="createTime" width="200px"></el-table-column>
         <el-table-column label="更新时间" align="center" prop="updateTime" width="200px"></el-table-column>
         <el-table-column label="操作" align="center" width="300px">
-          <template #default={row,$index}>
+          <template #default={row}>
             <el-button type="primary" size="small" icon="User" @click="setRole(row)">分配角色</el-button>
             <el-button type="primary" size="small" icon="Edit" @click="updateUser(row)">编辑</el-button>
 
@@ -146,6 +146,7 @@ const getHasUser = async (pager = 1) => {
 const changeSize = () => {
   getHasUser()
 }
+
 const addUser = () => {
   drawer.value = true
   Object.assign(userParams, {
@@ -315,7 +316,7 @@ const search = () => {
   // 清空关键字
   keyword.value = ''
 }
-const resst = () => {
+const reset = () => {
   settingStore.refsh = !settingStore.refsh
 }
 onMounted(() => {
