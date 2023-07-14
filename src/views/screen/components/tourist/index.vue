@@ -37,7 +37,7 @@ onMounted(() => {
             opacity: 0.9,
           },
         },
-        radius: '90%',
+        radius: '85%',
       },
     ],
     gird: {
@@ -55,7 +55,6 @@ onMounted(() => {
   background: url('../../images/dataScreen-main-lt.png') no-repeat;
   background-size: 100% 100%;
   margin-top: 20px;
-
   .top {
     .title {
       color: white;
@@ -82,8 +81,8 @@ onMounted(() => {
     margin: 50px 20px 0 20px;
     span {
       flex: 1;
-      height: 60px;
-      line-height: 60px;
+      height: 50px;
+      line-height: 50px;
       text-align: center;
       background: url('../../images/total.png');
       background-size: 100% 100%;
@@ -98,8 +97,8 @@ onMounted(() => {
   }
   .charts {
     width: 400px;
-    height: 250px;
-    margin: 20px;
+    height: 200px;
+    margin: 10px;
   }
 }
 </style>

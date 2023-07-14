@@ -6,15 +6,19 @@
       </div>
       <div class="bottom">
         <div class="left">
-          <div class="leftbox">
-            <Tourist class="tourist"></Tourist>
-            <Sex class="sex"></Sex>
-            <Age class="age"></Age>
-          </div>
-
+          <Tourist class="tourist"></Tourist>
+          <Sex class="sex"></Sex>
+          <Age class="age"></Age>
         </div>
-        <div class="center">left</div>
-        <div class="right">right</div>
+        <div class="center">
+          <Map class="map"></Map>
+          <Line class="line"></Line>
+        </div>
+        <div class="right">
+          <Rank class="rank"> </Rank>
+          <Year class="year"></Year>
+          <Couter class="couter"></Couter>
+        </div>
       </div>
     </div>
   </div>
@@ -26,12 +30,22 @@ import Top from './components/top/index.vue'
 import Tourist from './components/tourist/index.vue'
 import Sex from './components/sex/index.vue'
 import Age from './components/age/index.vue'
+import Map from './components/map/index.vue'
+import Line from './components/line/index.vue'
+import Rank from './components/rank/index.vue'
+import Year from './components/year/index.vue'
+import Couter from './components/couter/index.vue'
 let screen = ref()
+
 // 获取屏幕倍数
 const getScale = (w = 1920, h = 1080) => {
   const ww = window.innerWidth / w
   const wh = window.innerHeight / h
   return ww < wh ? ww : wh
+}
+
+window.onresize = () => {
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%,-50%)`
 }
 // 监听窗口
 onMounted(() => {
@@ -61,30 +75,57 @@ onMounted(() => {
       .left {
         flex: 1;
         height: 1040px;
-        .leftbox {
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        .tourist {
+          flex: 1.2;
           width: 400px;
-          height: 1024px;
-          margin-left: 30px;
-          display: flex;
-          flex-direction: column;
-          .tourist {
-            flex: 1.2;
-          }
-          .sex {
-            flex: 1;
-          }
-          .age {
-            flex: 1;
-          }
+          min-height: 369px;
+        }
+        .sex {
+          flex: 1;
+          width: 400px;
+          min-height: 304px;
+        }
+        .age {
+          flex: 1;
+          width: 400px;
         }
       }
       .center {
         height: 1040px;
-        flex: 1.5;
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        .map {
+          flex: 3;
+        }
+        .line {
+          flex: 1;
+        }
       }
       .right {
         flex: 1;
         height: 1040px;
+        margin-right: 30px;
+        display: flex;
+        flex-direction: column;
+        .rank {
+          flex: 1.2;
+          width: 400px;
+          min-height: 369px;
+        }
+        .year {
+          flex: 1;
+          width: 400px;
+          min-height: 304px;
+        }
+        .couder {
+          flex: 1;
+          width: 400px;
+        }
       }
     }
   }

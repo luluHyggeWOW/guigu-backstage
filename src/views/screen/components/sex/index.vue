@@ -14,17 +14,65 @@
         <p>女士</p>
         <img src="../../images/woman.png" alt="">
       </div>
+
     </div>
+    <div class="rate">
+      <p>男士58%</p>
+      <p>女士42%</p>
+    </div>
+    <div class="charts" ref="charts"></div>
   </div>
 
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import * as echarts from 'echarts'
 let people = ref('219608')
 let charts = ref()
-
-onMounted(() => {})
+onMounted(() => {
+  let mycharts = echarts.init(charts.value)
+  mycharts.setOption({
+    series: [
+      {
+        type: 'bar',
+        data: [58],
+        barWdith: 20,
+        z: 10,
+        itemStyle: {
+          color: 'blue',
+          borderRadius: 20,
+        },
+      },
+      {
+        type: 'bar',
+        data: [100],
+        barWdith: 20,
+        barGap: '-100%',
+        itemStyle: {
+          color: 'hotpink',
+          borderRadius: 20,
+        },
+      },
+    ],
+    gird: {
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+    },
+    xAxis: {
+      show: false,
+      min: 0,
+      max: 100,
+    },
+    yAxis: {
+      show: false,
+      type: 'category',
+    },
+    width: 290,
+  })
+})
 </script>
 
 <style scoped lang="scss">
@@ -58,6 +106,7 @@ onMounted(() => {})
   .sex {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
     .p {
       margin: 20px;
       width: 115px;
@@ -68,7 +117,7 @@ onMounted(() => {})
       p {
         position: absolute;
         color: white;
-        top: 580 px;
+        margin-top: -95px;
       }
     }
     .man {
@@ -77,6 +126,24 @@ onMounted(() => {})
     .woman {
       background: url('../../images/woman-bg.png');
     }
+  }
+  .rate {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 5px;
+    p {
+      margin-left: 60px;
+      margin-right: 60px;
+    }
+  }
+  .charts {
+    width: 290px;
+    height: 20px;
+    margin-left: -20px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
   }
 }
 </style>

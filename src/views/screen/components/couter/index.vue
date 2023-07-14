@@ -18,58 +18,41 @@ let charts = ref()
 onMounted(() => {
   let mycharts = echarts.init(charts.value)
   mycharts.setOption({
-    tooltip: {
-      trigger: 'item',
-    },
-    legend: {
-      top: '40',
-      right: '20',
-      orient: 'vertical',
+    title: {
+      text: '游客消费统计',
+      left: '70%',
       textStyle: {
         color: 'white',
-        fontSize: '14',
       },
+    },
+
+    radar: {
+      // shape: 'circle',
+      indicator: [
+        { name: '消费', max: 6500 },
+        { name: '好感', max: 16000 },
+        { name: '出行', max: 30000 },
+        { name: '小吃', max: 38000 },
+        { name: '爱好', max: 52000 },
+        { name: '景点', max: 25000 },
+      ],
     },
     series: [
       {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2,
-        },
-        label: {
-          show: false,
-          position: 'inside',
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 16,
-            fontWeight: 'bold',
-          },
-        },
-        labelLine: {
-          show: false,
-        },
+        name: 'Budget vs spending',
+        type: 'radar',
         data: [
-          { value: 1048, name: '军事' },
-          { value: 735, name: '新闻' },
-          { value: 580, name: '娱乐' },
-          { value: 484, name: '财经' },
-          { value: 300, name: '体育' },
+          {
+            value: [4200, 3000, 20000, 35000, 50000, 18000],
+            name: '购物',
+          },
+          {
+            value: [5000, 14000, 28000, 26000, 42000, 21000],
+            name: '吃饭',
+          },
         ],
       },
     ],
-    grid: {
-      left: 0,
-      top: 0,
-      right: 0,
-      bottom: 0,
-    },
   })
 })
 </script>
@@ -104,8 +87,9 @@ onMounted(() => {
   }
   .charts {
     width: 400px;
-    height: 270px;
+    height: 260px;
     margin-left: -20px;
+    margin-top: 10px;
     position: relative;
     left: 50%;
     transform: translate(-50%);
